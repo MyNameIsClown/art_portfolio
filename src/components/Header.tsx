@@ -1,6 +1,5 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
-import './styles.css';
+import "../assets/styles.css"
 
 export default function Header() {
     return (
@@ -8,9 +7,9 @@ export default function Header() {
             <h1>Mi Portfolio</h1>
             <nav>
                 <ul>
-                    <li><Link to="/">Inicio</Link></li>
-                    <li><Link to="/proyectos">Proyectos</Link></li>
-                    <li><Link to="/contacto">Contacto</Link></li>
+                    <li>Proyectos</li>
+                    <li>Sobre mi</li>
+                    <li>Contacto</li>
                 </ul>
             </nav>
         </header>
