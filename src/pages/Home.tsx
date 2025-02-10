@@ -12,14 +12,28 @@ const drawerWidth = 400;
 
 export default function Home() {
     const [proyects, setProyects] = useState<ProyectInterface[]>([]);
+    const [filteredProyects, setFilteredProyects] = useState<ProyectInterface[]>([]);
+
     useEffect(() => {
         setProyects(proyectData);
     }, []);
 
+    useEffect(() => {
+        setFilteredProyects(proyects.filter(proyect => proyect.id <= 3));
+    }, [proyects]);
+
+    const filterProyects = (selectedSectionId : number) => {
+        if(selectedSectionId == 0) {
+            setFilteredProyects(proyects.filter(proyect => proyect.id <= 3));
+            return;
+        }
+        setFilteredProyects(proyects.filter(proyect => proyect.section_id == selectedSectionId));
+    }
+
     return (
         <div>
-            <AsideMenu/>
-            <Box 
+            <AsideMenu onSelectSection={filterProyects}/>
+            <Box
                 className="home-container"
                 sx={{
                     marginLeft: { sm: `${drawerWidth}px`, xs: 0 }, // Agregar margen cuando el aside está fijo
@@ -28,7 +42,7 @@ export default function Home() {
                   }}
                 >
                 <Grid container>
-                    {proyects.filter(proyect => proyect.id <= 3).map((proyect) => (
+                    {filteredProyects.map((proyect) => (
                         <ProyectCard proyect={proyect}/>
                     ))}
                 </Grid>

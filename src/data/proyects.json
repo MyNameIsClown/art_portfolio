@@ -32,7 +32,7 @@
         "name": "Proyect 3",
         "description": "Description of proyect 3",
         "date": "2021-01-01",
-        "section_id": 1,
+        "section_id": 2,
         "header_img": "../assets/img/proyects/proyect3.jpg",
         "images": [
             "../assets/img/proyects/proyect3.jpg",
@@ -46,7 +46,7 @@
         "name": "Proyect 3",
         "description": "Description of proyect 3",
         "date": "2021-01-01",
-        "section_id": 1,
+        "section_id": 3,
         "header_img": "../assets/img/proyects/proyect3.jpg",
         "images": [
             "../assets/img/proyects/proyect3.jpg",

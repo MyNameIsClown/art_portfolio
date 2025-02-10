@@ -33,8 +33,11 @@ interface sectionData {
   title: string;
   url: string;
 }
+interface AsideMenuProps {
+  onSelectSection: (sectionId: number) => void;
+}
 
-export default function AsideMenu() {
+export default function AsideMenu({onSelectSection}: AsideMenuProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isClosingDrawer, setIsClosingDrawer] = useState(false);
   const [isPortfolioDropdownOpen, setIsPortfolioDropdownOpen] = useState(false);
@@ -74,7 +77,7 @@ export default function AsideMenu() {
           </ListItemButton>
         ) : null
       }
-      <ListItem>
+      <ListItem onClick={() => onSelectSection(0)}>
         <Avatar 
         className='avatar'
         alt="Irene Ayerbe Ruiz" 
@@ -82,10 +85,8 @@ export default function AsideMenu() {
         sx={{ width: avatarSize, height: avatarSize }}
       />
       </ListItem>
-      <ListItem>
+      <ListItem sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }} onClick={() => onSelectSection(0)}>
         <Typography variant='h1'>IRENE AYERBE RUIZ</Typography>
-      </ListItem>
-      <ListItem>
         <Typography variant='h5'>ilustradora</Typography>
       </ListItem>
       <ListItemButton onClick={handleClick}>
@@ -95,7 +96,7 @@ export default function AsideMenu() {
       <Collapse in={isPortfolioDropdownOpen} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
               {sections.map((item, index)=>(
-                  <ListItemButton sx={{ pl: 4 }} key={index}>
+                  <ListItemButton sx={{ pl: 4 }} key={index} onClick={() => onSelectSection(item.id)}>
                       <ListItemText primary={item.title} />
                   </ListItemButton>
               ))}

@@ -1,4 +1,4 @@
-import { Card } from "@mui/material";
+import { Card, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import ProyectInterface from "../interfaces/Proyect";
 import CssBaseline from '@mui/material/CssBaseline';
@@ -27,7 +27,7 @@ export default function ProyectCard({proyect}: ProyectCardProps) {
                     }
                   }}
             >
-                <h1>{proyect.name}</h1>
+                <Typography variant="h1">{proyect.name}</Typography>
                 <p>{proyect.description}</p>
                 <img src={proyect.header_img} alt={proyect.name}/>
             </Card>
