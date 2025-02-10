@@ -5,7 +5,7 @@ import AsideMenu from "../components/AsideMenu";
 import proyectData from '../data/proyects.json';
 
 import ProyectInterface from "../interfaces/Proyect";
-import { Box } from "@mui/material";
+import { Box, Fade } from "@mui/material";
 
 import Proyects from "./Proyects";
 import AboutMe from "./AboutMe";
@@ -61,10 +61,13 @@ export default function Home() {
                 width: { sm: `calc(100% - ${drawerWidth}px)`, xs: '100%' }, // Ajustar el ancho dinámicamente
                 minHeight: '100vh', // Asegura que el contenedor cubra toda la altura de la pantalla
                 backgroundColor: 'background.default', // Usa el color de fondo definido en el tema
-                padding: '20px', // Añade un poco de padding para evitar que el contenido toque los bordes
                 }}
             >
-                {renderPanel()}
+                <Fade in={!!activePanel} key={activePanel} timeout={500}>
+                    <div>
+                        {renderPanel()}
+                    </div>
+                </Fade>
             </Box>
         </div>
     );

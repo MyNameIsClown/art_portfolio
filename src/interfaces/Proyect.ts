@@ -6,5 +6,5 @@ export default interface ProyectInterface{
     section_id: number;
     header_img: string;
     images: string[];
-    size: number;
+    size?: number;
 }

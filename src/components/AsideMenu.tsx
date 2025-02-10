@@ -230,7 +230,7 @@ export default function AsideMenu({onSelectSection, onNavigate}: AsideMenuProps)
           aria-label="open drawer"
           edge="start"
           onClick={handleDrawerToggle}
-          sx={{ mr: 2, display: { sm: 'none' } }}
+          sx={{ mr: 2, display: { sm: 'none' }, zIndex: 1000 }}
         >
           <MenuIcon />
         </IconButton>
