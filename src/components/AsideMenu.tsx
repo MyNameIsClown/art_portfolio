@@ -35,14 +35,15 @@ interface sectionData {
 }
 interface AsideMenuProps {
   onSelectSection: (sectionId: number) => void;
+  onNavigate: (panel: 'projects' | 'about' | 'contacts') => void;
 }
 
-export default function AsideMenu({onSelectSection}: AsideMenuProps) {
+export default function AsideMenu({onSelectSection, onNavigate}: AsideMenuProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isClosingDrawer, setIsClosingDrawer] = useState(false);
   const [isPortfolioDropdownOpen, setIsPortfolioDropdownOpen] = useState(false);
   const [sections, setSections] = useState<sectionData[]>([]);
-  const [selectedSection, setSelectedSection] = useState<number>(0);
+  const [selectedSection, setSelectedSection] = useState<number | string>(0);
 
   useEffect(() => {
     setSections(sectionData);
@@ -68,9 +69,16 @@ export default function AsideMenu({onSelectSection}: AsideMenuProps) {
   };
 
   const handleSelectSection = (sectionId: number) => {
+    onNavigate('projects');
     setSelectedSection(sectionId);
     onSelectSection(sectionId);
   }
+
+  const handleSelectPage = (page: 'projects' | 'about' | 'contacts') => {
+    onNavigate(page);
+    setSelectedSection(page);
+  }
+  
 
   const drawer = (
     <List>
@@ -162,7 +170,7 @@ export default function AsideMenu({onSelectSection}: AsideMenuProps) {
         }}>
           <ListItemText primary="Descargar portafolio" />
       </ListItemButton>
-      <ListItemButton sx={{
+      <ListItemButton onClick={()=>handleSelectPage("about")} sx={{
           ":hover": {
             cursor: 'pointer',
             "&": {
@@ -170,9 +178,17 @@ export default function AsideMenu({onSelectSection}: AsideMenuProps) {
             }
           }
         }}>
-          <ListItemText primary="Sobre mi" />
+          {
+            selectedSection === "about" ? (
+              <ListItemText primary="Sobre mi" sx={
+                {color: '#ffb84d'}
+              }/>
+            ) : (
+              <ListItemText primary="Sobre mi" />
+            )
+          }
       </ListItemButton>
-      <ListItemButton sx={{
+      <ListItemButton onClick={()=>handleSelectPage("contacts")} sx={{
           ":hover": {
             cursor: 'pointer',
             "&": {
@@ -180,7 +196,15 @@ export default function AsideMenu({onSelectSection}: AsideMenuProps) {
             }
           }
         }}>
-          <ListItemText primary="Contacto" />
+          {
+            selectedSection === "contacts" ? (
+              <ListItemText primary="Contacto" sx={
+                {color: '#ffb84d'}
+              }/>
+            ) : (
+              <ListItemText primary="Contacto" />
+            )
+          }
       </ListItemButton>
       <ListItemButton sx={{
           ":hover": {
