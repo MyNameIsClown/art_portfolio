@@ -35,11 +35,11 @@ export default function Proyects({ proyects }: ProyectsProps) {
     }, [visibleProyects]);
 
     return (
-        <Grid container spacing={1}>
+        <Grid container spacing={1} columns={12} justifyContent="center">
             {proyects.length === 0 && <p>Todavia no hay proyectos en esta categoría</p>}
             {filteredProyects.map((proyect: ProyectInterface, index: number) => (
                 <Grow in={visibleProyects[index]} key={proyect.id} timeout={500}>
-                    <Grid size={proyect.size ?? "grow"}> {/* Envuelve ProyectCard en un div para evitar problemas de maquetación */}
+                    <Grid size={{ xs: 12, sm: 12, md: proyect.size ?? "grow" }}>
                         <ProyectCard proyect={proyect} />
                     </Grid>
                 </Grow>
