@@ -1,9 +1,11 @@
 import { createTheme } from '@mui/material/styles';
-import { ThemeOptions } from '@mui/material/styles';
 
-export const themeOptions: ThemeOptions = {
+export const theme = createTheme({
   palette: {
-    mode: 'dark',
+    // mode: 'dark',
+    background: {
+      default: '#f2f2f2',
+    },
     primary: {
       main: '#ffb84d',
     },
@@ -11,9 +13,6 @@ export const themeOptions: ThemeOptions = {
       main: '#331a00',
     },
   },
-};
-
-export const theme = createTheme({
   typography: {
     fontFamily: [
         'CosasBoscosas',
@@ -28,5 +27,5 @@ export const theme = createTheme({
       fontFamily: 'CosasBoscosas',
       fontSize: '2.5rem' // 56px
     },
-  }
+  },
 });

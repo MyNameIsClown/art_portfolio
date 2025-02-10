@@ -42,6 +42,7 @@ export default function AsideMenu({onSelectSection}: AsideMenuProps) {
   const [isClosingDrawer, setIsClosingDrawer] = useState(false);
   const [isPortfolioDropdownOpen, setIsPortfolioDropdownOpen] = useState(false);
   const [sections, setSections] = useState<sectionData[]>([]);
+  const [selectedSection, setSelectedSection] = useState<number>(0);
 
   useEffect(() => {
     setSections(sectionData);
@@ -66,6 +67,11 @@ export default function AsideMenu({onSelectSection}: AsideMenuProps) {
     }
   };
 
+  const handleSelectSection = (sectionId: number) => {
+    setSelectedSection(sectionId);
+    onSelectSection(sectionId);
+  }
+
   const drawer = (
     <List>
       {
@@ -77,41 +83,113 @@ export default function AsideMenu({onSelectSection}: AsideMenuProps) {
           </ListItemButton>
         ) : null
       }
-      <ListItem onClick={() => onSelectSection(0)}>
+      <ListItem onClick={() => handleSelectSection(0)}>
         <Avatar 
         className='avatar'
         alt="Irene Ayerbe Ruiz" 
         src="../assets/images/icon.png" 
-        sx={{ width: avatarSize, height: avatarSize }}
+        sx={{
+          width: avatarSize,
+          height: avatarSize,
+          ":hover": {
+            width: avatarSize + 5,
+            height: avatarSize + 5,
+          }
+        }}
       />
       </ListItem>
-      <ListItem sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }} onClick={() => onSelectSection(0)}>
+      <ListItem sx={{ 
+        display: 'flex', 
+        flexDirection: 'column', 
+        alignItems: 'center',
+        ":hover": {
+          cursor: 'pointer',
+          "&": {
+            color: '#ffb84d',}
+        }
+        }} 
+        onClick={() => handleSelectSection(0)}>
         <Typography variant='h1'>IRENE AYERBE RUIZ</Typography>
         <Typography variant='h5'>ilustradora</Typography>
       </ListItem>
-      <ListItemButton onClick={handleClick}>
+      <ListItemButton 
+        onClick={handleClick}
+        sx={{
+          ":hover": {
+            cursor: 'pointer',
+            "&": {
+              color: '#ffb84d',
+            }
+          }
+        }}>
           <ListItemText primary="Portafolio" />
           {isPortfolioDropdownOpen ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
       <Collapse in={isPortfolioDropdownOpen} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
               {sections.map((item, index)=>(
-                  <ListItemButton sx={{ pl: 4 }} key={index} onClick={() => onSelectSection(item.id)}>
-                      <ListItemText primary={item.title} />
+                  <ListItemButton sx={{ 
+                    pl: 4, 
+                    ":hover": {
+                      cursor: 'pointer',
+                      "&": {
+                        color: '#ffb84d',
+                      }
+                    }
+                  }}
+                    key={index}
+                    onClick={() => handleSelectSection(item.id)}>
+                      {
+                        selectedSection === item.id ? (
+                          <ListItemText primary={item.title} sx={
+                            {color: '#ffb84d'}
+                          }/>
+                        ) : (
+                          <ListItemText primary={item.title} />
+                        )
+                      }
                   </ListItemButton>
               ))}
           </List>
       </Collapse>
-      <ListItemButton>
+      <ListItemButton sx={{
+          ":hover": {
+            cursor: 'pointer',
+            "&": {
+              color: '#ffb84d',
+            }
+          }
+        }}>
           <ListItemText primary="Descargar portafolio" />
       </ListItemButton>
-      <ListItemButton>
+      <ListItemButton sx={{
+          ":hover": {
+            cursor: 'pointer',
+            "&": {
+              color: '#ffb84d',
+            }
+          }
+        }}>
           <ListItemText primary="Sobre mi" />
       </ListItemButton>
-      <ListItemButton>
+      <ListItemButton sx={{
+          ":hover": {
+            cursor: 'pointer',
+            "&": {
+              color: '#ffb84d',
+            }
+          }
+        }}>
           <ListItemText primary="Contacto" />
       </ListItemButton>
-      <ListItemButton>
+      <ListItemButton sx={{
+          ":hover": {
+            cursor: 'pointer',
+            "&": {
+              color: '#ffb84d',
+            }
+          }
+        }}>
           <ListItemText primary="correo@gmail.com" />
       </ListItemButton>
     </List>
@@ -146,7 +224,12 @@ export default function AsideMenu({onSelectSection}: AsideMenuProps) {
           }}
           sx={{
             display: { xs: 'block', sm: 'none' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+            '& .MuiDrawer-paper': { 
+              boxSizing: 'border-box', 
+              width: drawerWidth,
+              overflowY: 'auto',
+              overflowX: 'hidden',
+            },
           }}
         >
           {drawer}
@@ -155,7 +238,12 @@ export default function AsideMenu({onSelectSection}: AsideMenuProps) {
           variant="permanent"
           sx={{
             display: { xs: 'none', sm: 'block' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+            '& .MuiDrawer-paper': { 
+              boxSizing: 'border-box', 
+              width: drawerWidth,
+              overflowY: 'auto',
+              overflowX: 'hidden',
+            },
           }}
           open
         >

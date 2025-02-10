@@ -39,6 +39,9 @@ export default function Home() {
                     marginLeft: { sm: `${drawerWidth}px`, xs: 0 }, // Agregar margen cuando el aside está fijo
                     transition: 'margin 0.1s ease-in-out', // Suaviza la transición cuando cambia el tamaño
                     width: { sm: `calc(100% - ${drawerWidth}px)`, xs: '100%' }, // Ajustar el ancho dinámicamente
+                    minHeight: '100vh', // Asegura que el contenedor cubra toda la altura de la pantalla
+                    backgroundColor: 'background.default', // Usa el color de fondo definido en el tema
+                    padding: '20px', // Añade un poco de padding para evitar que el contenido toque los bordes
                   }}
                 >
                 <Grid container>
