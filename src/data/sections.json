@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "title": "Creación de personajes",
+        "url": "/character-creation"
+    },
+    {
+        "id": 2,
+        "title": "Editorial",
+        "url": "/publisher"
+    },
+    {
+        "id": 3,
+        "title": "Pinturas",
+        "url": "/paintings"
+    },
+    {
+        "id": 4,
+        "title": "Fotografía ilustrada",
+        "url": "/illustrated-photo"
+    },
+    {
+        "id": 5,
+        "title": "Proyectos personales",
+        "url": "/personal-artwork"
+    },
+    {
+        "id": 6,
+        "title": "Proyectos de clase",
+        "url": "/class-artwork"
+    }
+]

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useEffect, useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -13,123 +13,135 @@ import {
     Collapse,
     ListItemIcon,
     ListItemText,
-    ListItem
+    ListItem,
+    Typography
 } 
 from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import "./AsideMenu.css"
 import Link from '@mui/material/Link';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
+import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
+import sectionData from '../data/sections.json';
 
-const drawerWidth = 240;
+const drawerWidth = 400;
+const avatarSize = 200;
+
+interface sectionData {
+  id: number;
+  title: string;
+  url: string;
+}
 
 export default function AsideMenu() {
-  const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [isClosing, setIsClosing] = React.useState(false);
-  const [open, setOpen] = React.useState(true);
-  const menuItemsText = [
-    "Creación de personajes",
-    "Editorial",
-    "Fotografía iustrada",
-    "Pinturas",
-    "Proyectos personales",
-    "Proyectos de clase"
-  ]
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [isClosingDrawer, setIsClosingDrawer] = useState(false);
+  const [isPortfolioDropdownOpen, setIsPortfolioDropdownOpen] = useState(false);
+  const [sections, setSections] = useState<sectionData[]>([]);
+
+  useEffect(() => {
+    setSections(sectionData);
+  }, []);
 
   const handleClick = () => {
-    setOpen(!open);
+    setIsPortfolioDropdownOpen(!isPortfolioDropdownOpen);
   };
 
   const handleDrawerClose = () => {
-    setIsClosing(true);
+    setIsClosingDrawer(true);
     setMobileOpen(false);
   };
 
   const handleDrawerTransitionEnd = () => {
-    setIsClosing(false);
+    setIsClosingDrawer(false);
   };
 
   const handleDrawerToggle = () => {
-    if (!isClosing) {
+    if (!isClosingDrawer) {
       setMobileOpen(!mobileOpen);
     }
   };
 
   const drawer = (
-    <div className='menuContainer'>
-      <Avatar
-        alt="Irene Ayerbe"
-        sx={{ width: 200, height: 200 }}
-        />
-        <h1>Irene Ayerbe Ruiz</h1>
-        <h4>Ilustradora</h4>
-        <List>
-            <ListItemButton onClick={handleClick}>
-                <ListItemText primary="Portafolio" />
-                {open ? <ExpandLess /> : <ExpandMore />}
-            </ListItemButton>
-            <Collapse in={open} timeout="auto" unmountOnExit>
-                <List component="div" disablePadding>
-                    {menuItemsText.map((item, index)=>(
-                        <ListItemButton sx={{ pl: 4 }}>
-                            <ListItemText primary={item} />
-                        </ListItemButton>
-                    ))}
-                </List>
-            </Collapse>
-            <ListItemButton>
-                <ListItemText primary="Descargar portafolio" />
-            </ListItemButton>
-            <ListItemButton>
-                <ListItemText primary="Sobre mi" />
-            </ListItemButton>
-            <ListItemButton>
-                <ListItemText primary="Contacto" />
-            </ListItemButton>
-            <ListItemButton>
-                <ListItemText primary="correo@gmail.com" />
-            </ListItemButton>
-        </List>
-    </div>
+    <List>
+      {
+        mobileOpen ? (
+          <ListItemButton onClick={handleDrawerClose}>
+            <ListItemIcon className='close-icon'>
+              <CloseOutlinedIcon />
+            </ListItemIcon>
+          </ListItemButton>
+        ) : null
+      }
+      <ListItem>
+        <Avatar 
+        className='avatar'
+        alt="Irene Ayerbe Ruiz" 
+        src="../assets/images/icon.png" 
+        sx={{ width: avatarSize, height: avatarSize }}
+      />
+      </ListItem>
+      <ListItem>
+        <Typography variant='h1'>IRENE AYERBE RUIZ</Typography>
+      </ListItem>
+      <ListItem>
+        <Typography variant='h5'>ilustradora</Typography>
+      </ListItem>
+      <ListItemButton onClick={handleClick}>
+          <ListItemText primary="Portafolio" />
+          {isPortfolioDropdownOpen ? <ExpandLess /> : <ExpandMore />}
+      </ListItemButton>
+      <Collapse in={isPortfolioDropdownOpen} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding>
+              {sections.map((item, index)=>(
+                  <ListItemButton sx={{ pl: 4 }} key={index}>
+                      <ListItemText primary={item.title} />
+                  </ListItemButton>
+              ))}
+          </List>
+      </Collapse>
+      <ListItemButton>
+          <ListItemText primary="Descargar portafolio" />
+      </ListItemButton>
+      <ListItemButton>
+          <ListItemText primary="Sobre mi" />
+      </ListItemButton>
+      <ListItemButton>
+          <ListItemText primary="Contacto" />
+      </ListItemButton>
+      <ListItemButton>
+          <ListItemText primary="correo@gmail.com" />
+      </ListItemButton>
+    </List>
   );
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex', position: 'fixed', zIndex: 1000 }}>
       <CssBaseline />
-      <AppBar
-        position="fixed"
-        sx={{
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
-          ml: { sm: `${drawerWidth}px` },
-        }}
-      >
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: 'none' } }}
-          >
-            <MenuIcon />
-          </IconButton>
-        </Toolbar>
-      </AppBar>
+      <Toolbar>
+        <IconButton
+          color="inherit"
+          aria-label="open drawer"
+          edge="start"
+          onClick={handleDrawerToggle}
+          sx={{ mr: 2, display: { sm: 'none' } }}
+        >
+          <MenuIcon />
+        </IconButton>
+      </Toolbar>
       <Box
         component="nav"
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
         aria-label="mailbox folders"
       >
-        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
         <Drawer
           variant="temporary"
           open={mobileOpen}
           onTransitionEnd={handleDrawerTransitionEnd}
           onClose={handleDrawerClose}
           ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
+            keepMounted: true,
           }}
           sx={{
             display: { xs: 'block', sm: 'none' },
