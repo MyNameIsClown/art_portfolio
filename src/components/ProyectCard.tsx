@@ -12,10 +12,11 @@ export default function ProyectCard({proyect}: ProyectCardProps) {
         window.location.href = `/proyect/${proyect.id}`;
     }
     return (
-        <Grid size={proyect.size} key={proyect.id}>
+        <div>
             <CssBaseline/>
             <Card className="proyect-card" onClick={handleNavigate(proyect)}
                 sx={{
+                    minWidth: '300px',
                     height: '600px',
                     margin: '20px',
                     padding: '50px',
@@ -31,6 +32,6 @@ export default function ProyectCard({proyect}: ProyectCardProps) {
                 <p>{proyect.description}</p>
                 <img src={proyect.header_img} alt={proyect.name}/>
             </Card>
-        </Grid>
+        </div>
     );
 }

@@ -69,12 +69,14 @@ export default function AsideMenu({onSelectSection, onNavigate}: AsideMenuProps)
   };
 
   const handleSelectSection = (sectionId: number) => {
+    handleDrawerClose();
     onNavigate('projects');
     setSelectedSection(sectionId);
     onSelectSection(sectionId);
   }
 
   const handleSelectPage = (page: 'projects' | 'about' | 'contacts') => {
+    handleDrawerClose();
     onNavigate(page);
     setSelectedSection(page);
   }

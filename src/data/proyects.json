@@ -1,7 +1,7 @@
 [
     {
         "id": 1,
-        "name": "Acridocamelus Rosatus",
+        "name": "ACRIDOCAMELUS ROSATUS",
         "description": "Description of proyect 1",
         "date": "2021-01-01",
         "section_id": 1,
@@ -15,7 +15,7 @@
     },
     {
         "id": 2,
-        "name": "Proyect 2",
+        "name": "´EJEMPLO´",
         "description": "Description of proyect 2",
         "date": "2021-01-01",
         "section_id": 1,
@@ -24,8 +24,7 @@
             "../assets/img/proyects/proyect2.jpg",
             "../assets/img/proyects/proyect2.jpg",
             "../assets/img/proyects/proyect2.jpg"
-        ],
-        "size": 6
+        ]
     },
     {
         "id": 3,
@@ -38,8 +37,7 @@
             "../assets/img/proyects/proyect3.jpg",
             "../assets/img/proyects/proyect3.jpg",
             "../assets/img/proyects/proyect3.jpg"
-        ],
-        "size": 6
+        ]
     },
     {
         "id": 4,
@@ -52,7 +50,6 @@
             "../assets/img/proyects/proyect3.jpg",
             "../assets/img/proyects/proyect3.jpg",
             "../assets/img/proyects/proyect3.jpg"
-        ],
-        "size": 12
+        ]
     }
 ]
